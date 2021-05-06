@@ -1,18 +1,52 @@
 import React from "react";
 import FilterMenu from "../FilterMenu/FilterMenu";
+import Link from "next/link";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: inline-block;
+  width: 100%;
+  background-color: ${(props) => props.theme.colors.secondary};
+  color: ${(props) => props.theme.colors.tertiary};
+`;
+
+const Nav = styled.nav`
+  border-bottom: 1px solid ${(props) => props.theme.colors.quaternary};
+  margin: 0;
+  padding: 1rem;
+`;
+
+const List = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  grid-gap: 1rem;
+  justify-content: flex-end;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: auto;
+`;
 
 const NavBar = () => (
-  <div>
-    <nav>
-      <ul>
-        <li>Sample Item</li>
-        <li>Sample Item</li>
-        <li>Sample Item</li>
-        <li>Sample Item</li>
-      </ul>
-    </nav>
+  <Container>
+    <Nav>
+      <List>
+        <li>
+          <Link href="/">Movies</Link>
+        </li>
+        <li>
+          <Link href="/about">About</Link>
+        </li>
+        <li>
+          <Link href="/faq">FAQ</Link>
+        </li>
+        <li>
+          <Link href="/terms">Terms Of Use</Link>
+        </li>
+      </List>
+    </Nav>
     <FilterMenu />
-  </div>
+  </Container>
 );
 
 export default NavBar;
