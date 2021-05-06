@@ -1,0 +1,101 @@
+[
+  {
+    "id": "0",
+    "title": "The Shashank Redemption",
+    "releaseDate": 1994,
+    "rating": 9.2,
+    "genere": "Drama",
+    "thumbnail": "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UY323_.jpg",
+    "trailer": "https://www.youtube.com/watch?v=6hB3S9bIaco"
+  },
+  {
+    "id": "1",
+    "title": "The God Father",
+    "releaseDate": 1972,
+    "rating": 9.1,
+    "genere": "Crime",
+    "thumbnail": "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UY268_CR3,0,182,268_AL_.jpg",
+    "trailer": "https://www.youtube.com/watch?v=sY1S34973zA"
+  },
+  {
+    "id": "2",
+    "title": "The Dark Knight",
+    "releaseDate": 2008,
+    "rating": 9.0,
+    "genere": "Action",
+    "thumbnail": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    "trailer": "https://www.youtube.com/watch?v=EXeTwQWrcwY"
+  },
+  {
+    "id": "3",
+    "title": "Inception",
+    "releaseDate": 2010,
+    "rating": 8.8,
+    "genere": "Action",
+    "thumbnail": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    "trailer": "https://www.youtube.com/watch?v=8hP9D6kZseM"
+  },
+  {
+    "id": "4",
+    "title": "The Intouchables",
+    "releaseDate": 2011,
+    "rating": 8.5,
+    "genere": "Action",
+    "thumbnail": "https://m.media-amazon.com/images/M/MV5BMTYxNDA3MDQwNl5BMl5BanBnXkFtZTcwNTU4Mzc1Nw@@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    "trailer": "https://www.youtube.com/watch?v=oK5hMNxqsFA"
+  },
+  {
+    "id": "5",
+    "title": "Joker",
+    "releaseDate": 2019,
+    "rating": 8.4,
+    "genere": "Crime",
+    "thumbnail": "https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    "trailer": "https://www.youtube.com/watch?v=zAGVQLHvwOY"
+  },
+  {
+    "id": "6",
+    "title": "Oldboy",
+    "releaseDate": 2003,
+    "rating": 8.4,
+    "genere": "Action",
+    "thumbnail": "https://m.media-amazon.com/images/M/MV5BMTI3NTQyMzU5M15BMl5BanBnXkFtZTcwMTM2MjgyMQ@@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    "trailer": "https://www.youtube.com/watch?v=vdQfLoMh1N0"
+  },
+  {
+    "id": "7",
+    "title": "Your Name",
+    "releaseDate": 2017,
+    "rating": 8.4,
+    "genere": "Animation",
+    "thumbnail": "https://m.media-amazon.com/images/M/MV5BODRmZDVmNzUtZDA4ZC00NjhkLWI2M2UtN2M0ZDIzNDcxYThjL2ltYWdlXkEyXkFqcGdeQXVyNTk0MzMzODA@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    "trailer": "https://www.youtube.com/watch?v=xU47nhruN-Q"
+  },
+  {
+    "id": "8",
+    "title": "Dangal",
+    "releaseDate": 2016,
+    "rating": 8.4,
+    "genere": "Action",
+    "thumbnail": "https://m.media-amazon.com/images/M/MV5BMTQ4MzQzMzM2Nl5BMl5BanBnXkFtZTgwMTQ1NzU3MDI@._V1_UY268_CR4,0,182,268_AL_.jpg",
+    "trailer": "https://www.youtube.com/watch?v=x_7YlGv9u1g"
+  },
+  {
+    "id": "9",
+    "title": "The Father",
+    "releaseDate": 2020,
+    "rating": 8.3,
+    "genere": "Drama",
+    "thumbnail": "https://m.media-amazon.com/images/M/MV5BZGJhNWRiOWQtMjI4OS00ZjcxLTgwMTAtMzQ2ODkxY2JkOTVlXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    "trailer": "https://www.youtube.com/watch?v=4TZb7YfK-JI"
+  },
+  {
+    "id": "10",
+    "title": "Up",
+    "releaseDate": 2009,
+    "rating": 8.2,
+    "genere": "Animation",
+    "thumbnail": "https://m.media-amazon.com/images/M/MV5BMTk3NDE2NzI4NF5BMl5BanBnXkFtZTgwNzE1MzEyMTE@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    "trailer": "https://www.youtube.com/watch?v=ORFWdXl_zJ4"
+  }
+]

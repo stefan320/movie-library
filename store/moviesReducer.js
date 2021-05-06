@@ -1,5 +1,5 @@
 const initialState = {
-  topEightMovies: [{ id: 1 }],
+  topEightMovies: [{ id: 51 }],
 };
 
 const moviesReducer = (state = initialState, action) => {
