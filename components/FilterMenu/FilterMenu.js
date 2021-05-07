@@ -1,9 +1,12 @@
 import React from "react";
 import Input from "../Input/Input";
 import styled from "styled-components";
+import { loadGetInitialProps } from "next/dist/next-server/lib/utils";
 
 const Container = styled.div`
   padding: 1rem;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.quaternary};
+
   & input[type="checkbox"] {
     margin-left: 0;
   }
@@ -17,13 +20,21 @@ const InputContainer = styled.div`
   grid-gap: 0.5rem 1rem;
 `;
 
-const FilterMenu = () => {
+const FilterMenu = (props) => {
+  const inputChangedHandler = (ev) => {
+    console.log(ev);
+  };
+
   return (
     <Container>
       {/* Generes inputs*/}
       <span>Generes</span>
       <InputContainer>
-        <Input name={"Action"} type={"checkbox"} />
+        <Input
+          name={"Action"}
+          type={"checkbox"}
+          inputValueChange={inputChangedHandler}
+        />
         <Input name={"Animation"} type={"checkbox"} />
         <Input name={"Comedy"} type={"checkbox"} />
         <Input name={"Crime"} type={"checkbox"} />

@@ -1,12 +1,11 @@
 import React from "react";
-import FilterMenu from "../FilterMenu/FilterMenu";
 import Link from "next/link";
 import styled from "styled-components";
 
 const Container = styled.div`
   display: inline-block;
   width: 100%;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.tertiary};
 `;
 
@@ -45,7 +44,6 @@ const NavBar = () => (
         </li>
       </List>
     </Nav>
-    <FilterMenu />
   </Container>
 );
 

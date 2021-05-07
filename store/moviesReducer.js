@@ -1,11 +1,16 @@
+import * as actionTypes from "./actionTypes";
+
 const initialState = {
-  topEightMovies: [{ id: 51 }],
+  displayedMovies: null,
 };
 
 const moviesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 3:
-      return state;
+    case actionTypes.FETCH_ALL_MOVIES:
+      return {
+        ...state,
+        displayedMovies: action.movieDetails,
+      };
     default:
       return state;
   }
