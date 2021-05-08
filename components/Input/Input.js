@@ -7,12 +7,8 @@ const Input = (props) => {
         type={props.type}
         name={props.name}
         id={props.name}
-        onChange={(ev) =>
-          props.inputValueChange({
-            filterName: props.name,
-            value: ev.target.checked,
-          })
-        }
+        // checked={props.checked}
+        onChange={props.inputChanged}
       ></input>
       <label htmlFor={props.name}>{props.name}</label>
     </div>

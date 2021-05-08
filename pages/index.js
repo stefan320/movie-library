@@ -11,26 +11,34 @@ const Home = (props) => {
     props.onPageInit();
   }, []);
 
+  // const inputChangedHandler = (filterOptions) => {
+  //   // if checkbox is checked return the checkbox name else empty string
+  //   const filter = filterOptions.value ? filterOptions.filterName : "";
+  //   console.log(filter);
+  // };
   return (
     <>
-      <FilterMenu />
+      <FilterMenu
+        inputChangedHandler={(filterName) =>
+          props.filtersChanged(filterName, props.activeFilters)
+        }
+        searchChangedHandler={(search) => props.searchByString(search)}
+        selectMenuHandler={(value) => props.sortBy(value)}
+        // filters={props.filters}
+      />
       <div className={styles.container}>
         {props.displayedMovies
-          ? props.displayedMovies
-              // .filter((movie) =>
-              //   ["action", "crime"].includes(movie.genere.toLowerCase())
-              // )
-              .map((movie) => (
-                <div key={uniqid()}>
-                  <img src={movie.thumbnail} alt={movie.title} />
-                  <h2>{movie.title}</h2>
-                  <div>
-                    <span>({movie.releaseDate})</span>
-                    <span>{movie.rating}</span>
-                    <span>{movie.genere}</span>
-                  </div>
+          ? props.displayedMovies.map((movie) => (
+              <div key={uniqid()}>
+                <img src={movie.thumbnail} alt={movie.title} />
+                <h2>{movie.title}</h2>
+                <div>
+                  <div>{movie.releaseDate}</div>
+                  <div>{movie.rating}</div>
+                  <div>{movie.genere}</div>
                 </div>
-              ))
+              </div>
+            ))
           : null}
       </div>
     </>
@@ -39,15 +47,22 @@ const Home = (props) => {
 
 const mapStateToProps = (state) => {
   console.log(state);
-  const movies = {
+  const movieData = {
     displayedMovies: state.displayedMovies,
+    // filters: state.filters,
+    activeFilters: state.activeFilters,
   };
-  return movies;
+  return movieData;
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onPageInit: () => actionCreator.initMovieList(dispatch),
+    filtersChanged: (changedFilter, filtersArr) =>
+      dispatch(actionCreator.filterMovieList(changedFilter, filtersArr)),
+    searchByString: (string) =>
+      dispatch(actionCreator.updateSearchResults(string)),
+    sortBy: (value) => dispatch(actionCreator.movieSorter(value)),
   };
 };
 

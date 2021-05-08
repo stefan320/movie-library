@@ -1,7 +1,6 @@
 import React from "react";
 import Input from "../Input/Input";
 import styled from "styled-components";
-import { loadGetInitialProps } from "next/dist/next-server/lib/utils";
 
 const Container = styled.div`
   padding: 1rem;
@@ -21,33 +20,53 @@ const InputContainer = styled.div`
 `;
 
 const FilterMenu = (props) => {
-  const inputChangedHandler = (ev) => {
-    console.log(ev);
-  };
-
   return (
     <Container>
-      {/* Generes inputs*/}
-      <span>Generes</span>
+      {/* Genres inputs*/}
+      <span>Genres</span>
       <InputContainer>
         <Input
           name={"Action"}
           type={"checkbox"}
-          inputValueChange={inputChangedHandler}
+          // checked={props.filters.action}
+          inputChanged={() => props.inputChangedHandler("action")}
         />
-        <Input name={"Animation"} type={"checkbox"} />
-        <Input name={"Comedy"} type={"checkbox"} />
-        <Input name={"Crime"} type={"checkbox"} />
-        <Input name={"Drama"} type={"checkbox"} />
-        <Input name={"Other"} type={"checkbox"} />
+
+        <Input
+          name={"Animation"}
+          type={"checkbox"}
+          inputChanged={() => props.inputChangedHandler("animation")}
+        />
+
+        <Input
+          name={"Crime"}
+          type={"checkbox"}
+          inputChanged={() => props.inputChangedHandler("crime")}
+        />
+
+        <Input
+          name={"Drama"}
+          type={"checkbox"}
+          inputChanged={() => props.inputChangedHandler("drama")}
+        />
+
+        <Input
+          name={"Search"}
+          type={"search"}
+          inputChanged={(ev) => props.searchChangedHandler(ev.target.value)}
+        />
       </InputContainer>
 
       {/* sort by Rating (Highest First) */}
       {/* Sort bY  Year (Newest First) */}
       <label htmlFor="movieSorting">Sort By:</label>
-      <select name={"movieSorting"}>
-        <option>Rating</option>
-        <option>Year</option>
+      <select
+        name={"movieSorting"}
+        id={"movieSorting"}
+        onChange={(ev) => props.selectMenuHandler(ev.target.value)}
+      >
+        <option value="rating">Rating</option>
+        <option value="releaseDate">Year</option>
       </select>
     </Container>
   );
