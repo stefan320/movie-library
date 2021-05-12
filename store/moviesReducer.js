@@ -13,7 +13,9 @@ const initialState = {
     other: false,
     search: "",
   },
+  searchFilterValue: "",
   activeFilters: [],
+  sortBy: "rating",
 };
 
 const moviesReducer = (state = initialState, action) => {
@@ -37,12 +39,14 @@ const moviesReducer = (state = initialState, action) => {
         ...state,
         ...state.activeFilters,
         displayedMovies: [...action.displayedMovies],
+        searchFilterValue: action.searchFilterValue,
       };
     case actionTypes.SORT_MOVIES:
       return {
         ...state,
         ...state.activeFilters,
         displayedMovies: [...action.displayedMovies],
+        sortBy: action.sortByValue,
       };
     default:
       return state;

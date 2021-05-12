@@ -64,6 +64,7 @@ const FilterMenu = (props) => {
         name={"movieSorting"}
         id={"movieSorting"}
         onChange={(ev) => props.selectMenuHandler(ev.target.value)}
+        value={props.sortByValue}
       >
         <option value="rating">Rating</option>
         <option value="releaseDate">Year</option>

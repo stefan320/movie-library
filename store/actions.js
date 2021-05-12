@@ -15,6 +15,8 @@ const sortMovies = (moviesArr, sortBy, order = "decending") => {
   }
 };
 
+const limitDisplayMovies = (movies, limit = 8) => movies.slice(0, limit);
+
 export const initMovieList = (dispatch) => {
   const key = "$2b$10$QTMZaMPzjv.J7fnQLPoQSOCkpB4W5lZ/cp4zX/CqZR6l3LZ1LzT.G";
   axios
@@ -26,15 +28,14 @@ export const initMovieList = (dispatch) => {
     .then((response) => {
       // handle success
       allMovies = response.data.record;
-      const topRatedMovies = () => sortMovies(allMovies, "rating");
-      const topEightMovies = () => topRatedMovies().slice(0, 8);
-      return dispatch(initPage(topEightMovies()));
+      const topRatedMovies = sortMovies(allMovies, "rating");
+      const topEightMovies = limitDisplayMovies(topRatedMovies).slice(0, 8);
+      return dispatch(initPage(topEightMovies));
     })
     .catch((error) => {
       // handle error
       console.log(error);
     });
-  //   };
 };
 
 export const initPage = (topEightMovies) => {
@@ -44,56 +45,81 @@ export const initPage = (topEightMovies) => {
   };
 };
 
-export const filterMovieList = (filter, filtersArr) => {
-  // Check if clicked filter is already in the arr
-  const filteredArray = (filtersArr, filter) => {
-    return filtersArr.includes(filter.toLowerCase()) // if yes remove it
-      ? filtersArr.filter((filterItem) => filterItem != filter.toLowerCase())
-      : //else add it
-        filtersArr.concat(filter.toLowerCase());
-  };
-  // recives an array with filters ie [crime, drama] and an array  with all movies
-  // if there are filters it will return an array with an array for each filter with matches ie. [[...crimeMovies],[...dramMovies]]
-  const filteredMovies = (filtersArr, allMovies) => {
-    if (filtersArr.length > 0) {
-      return filtersArr.map((filter) => {
-        return allMovies.filter(
-          (movie) => movie.genere.toLowerCase() === filter
-        );
-      });
-    } else {
-      return allMovies;
-    }
-  };
-
-  const updatedFiltersArr = filteredArray(filtersArr, filter);
-  const updatedDisplayedMovies = mergeArrays(
-    filteredMovies(updatedFiltersArr, allMovies)
-  );
-  return updateFiltersResults(updatedFiltersArr, updatedDisplayedMovies);
+// recives an array with filters ie [crime, drama] and an array  with all movies
+// if there are filters it will return an array with an array for each filter with matches ie. [[...crimeMovies],[...dramMovies]]
+const filterMoviesByGenre = (filtersArr, allMovies) => {
+  if (filtersArr.length > 0) {
+    return filtersArr.map((filter) => {
+      return allMovies.filter((movie) => movie.genere.toLowerCase() === filter);
+    });
+  } else {
+    return allMovies;
+  }
 };
 
-const updateFiltersResults = (updatedFiltersArr, updatedDisplayedMovies) => {
+// Check if clicked filter is already in the arr
+const updateFilterList = (filtersArr, filter) => {
+  filter = filter.toLowerCase();
+  return filtersArr.includes(filter)
+    ? // if yes remove it
+      filtersArr.filter((filterItem) => filterItem != filter)
+    : //else add it
+      filtersArr.concat(filter);
+};
+
+export const filterMovieList = (
+  filter,
+  filtersArr,
+  queryString,
+  sortByValue
+) => {
+  // add / remove the clicked filter from filtersArr
+  const updatedFiltersArr = updateFilterList(filtersArr, filter);
+
+  // Chack which movies matches the current selected genres
+  const matchedGenreMovies = mergeArrays(
+    filterMoviesByGenre(updatedFiltersArr, allMovies)
+  );
+
+  // Then filter the matchedGenreMovies that matches the value of search field
+  const filteredMovies = matchedGenreMovies.filter((movie) =>
+    movie.title.toLowerCase().includes(queryString.toLowerCase())
+  );
+
+  // Finaly sort the movies accordingly
+  const sortedMovies = sortMovies(filteredMovies, sortByValue);
+  return updateFiltersResults(updatedFiltersArr, sortedMovies, queryString);
+};
+
+const updateFiltersResults = (updatedFiltersArr, sortedMovies, queryString) => {
   return {
     type: actionTypes.FILTER_CHANGED,
     filtersArr: updatedFiltersArr,
-    displayedMovies: updatedDisplayedMovies,
+    displayedMovies: sortedMovies,
+    searchFilterValue: queryString,
   };
 };
 
-export const updateSearchResults = (searchRes) => {
+export const updateSearchResults = (queryString, filtersArr, sortByValue) => {
+  const matchedGenreMovies = mergeArrays(
+    filterMoviesByGenre(filtersArr, allMovies)
+  );
+  const filteredMovies = matchedGenreMovies.filter((movie) =>
+    movie.title.toLowerCase().includes(queryString.toLowerCase())
+  );
+  const sortedMovies = sortMovies(filteredMovies, sortByValue);
+
   return {
     type: actionTypes.SEARCH_CHANGED,
-    displayedMovies: allMovies.filter((movie) =>
-      movie.title.toLowerCase().includes(searchRes.toLowerCase())
-    ),
+    displayedMovies: sortedMovies,
+    searchFilterValue: queryString.toLowerCase(),
   };
 };
 
-export const movieSorter = (sortBy) => {
-  console.log(sortBy);
+export const movieSorter = (sortBy, prevDisplayedMovies) => {
   return {
     type: actionTypes.SORT_MOVIES,
-    displayedMovies: sortMovies(allMovies, sortBy),
+    displayedMovies: sortMovies(prevDisplayedMovies, sortBy),
+    sortByValue: sortBy,
   };
 };

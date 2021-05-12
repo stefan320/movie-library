@@ -11,19 +11,25 @@ const Home = (props) => {
     props.onPageInit();
   }, []);
 
-  // const inputChangedHandler = (filterOptions) => {
-  //   // if checkbox is checked return the checkbox name else empty string
-  //   const filter = filterOptions.value ? filterOptions.filterName : "";
-  //   console.log(filter);
-  // };
   return (
     <>
       <FilterMenu
-        inputChangedHandler={(filterName) =>
-          props.filtersChanged(filterName, props.activeFilters)
+        inputChangedHandler={(filterName) => {
+          console.log(props.sortByValue);
+          props.filtersChanged(
+            filterName,
+            props.activeFilters,
+            props.searchFilter,
+            props.sortByValue
+          );
+        }}
+        searchChangedHandler={(search) =>
+          props.searchByString(search, props.activeFilters, props.sortByValue)
         }
-        searchChangedHandler={(search) => props.searchByString(search)}
-        selectMenuHandler={(value) => props.sortBy(value)}
+        selectMenuHandler={(value) =>
+          props.sortBy(value, props.displayedMovies)
+        }
+        sortByValue={props.sortByValue}
         // filters={props.filters}
       />
       <div className={styles.container}>
@@ -51,6 +57,8 @@ const mapStateToProps = (state) => {
     displayedMovies: state.displayedMovies,
     // filters: state.filters,
     activeFilters: state.activeFilters,
+    searchFilter: state.searchFilterValue,
+    sortByValue: state.sortBy,
   };
   return movieData;
 };
@@ -58,11 +66,24 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onPageInit: () => actionCreator.initMovieList(dispatch),
-    filtersChanged: (changedFilter, filtersArr) =>
-      dispatch(actionCreator.filterMovieList(changedFilter, filtersArr)),
-    searchByString: (string) =>
-      dispatch(actionCreator.updateSearchResults(string)),
-    sortBy: (value) => dispatch(actionCreator.movieSorter(value)),
+
+    filtersChanged: (changedFilter, filtersArr, searchString, sortByValue) =>
+      dispatch(
+        actionCreator.filterMovieList(
+          changedFilter,
+          filtersArr,
+          searchString,
+          sortByValue
+        )
+      ),
+
+    searchByString: (string, activeFilters, sortByValue) =>
+      dispatch(
+        actionCreator.updateSearchResults(string, activeFilters, sortByValue)
+      ),
+
+    sortBy: (value, displayedMovies) =>
+      dispatch(actionCreator.movieSorter(value, displayedMovies)),
   };
 };
 
