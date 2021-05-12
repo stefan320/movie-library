@@ -7,7 +7,6 @@ const Input = (props) => {
         type={props.type}
         name={props.name}
         id={props.name}
-        // checked={props.checked}
         onChange={props.inputChanged}
       ></input>
       <label htmlFor={props.name}>{props.name}</label>
